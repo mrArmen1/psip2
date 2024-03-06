@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Тестовая страница</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #dragElement {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #dropTarget {
+            width: 200px;
+            height: 200px;
+            background-color: #f0f0f0;
+            margin: 20px auto;
+            border: 2px dashed #007bff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Тест событий</h1>
+    </header>
+    <div class="container">
+        <h2>Drag and Drop</h2>
+        <p>Перетащите элемент сюда:</p>
+        <div id="dropTarget"></div>
+        <div id="dragElement" draggable="true">Перетащи меня</div>
+    </div>
+
+    <script>
+        const dragElement = document.getElementById("dragElement");
+        const dropTarget = document.getElementById("dropTarget");
+
+        // Обработчики событий для Drag and Drop
+        dragElement.addEventListener("dragstart", function(event) {
+            // Начало перетаскивания
+            event.dataTransfer.setData("text/plain", "Перетаскиваемый элемент");
+        });
+
+        dropTarget.addEventListener("dragover", function(event) {
+            // Разрешаем событие "drop" в зоне перетаскивания
+            event.preventDefault();
+        });
+
+        dropTarget.addEventListener("drop", function(event) {
+            // Событие "drop" - элемент брошен в зону перетаскивания
+            event.preventDefault();
+            const data = event.dataTransfer.getData("text/plain");
+            dropTarget.textContent = data;
+        });
+    </script>
+</body>
+</html>

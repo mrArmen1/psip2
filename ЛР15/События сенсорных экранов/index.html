@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Тестовая страница</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #touchArea {
+            width: 800px;
+            height: 200px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Тест событий</h1>
+    </header>
+    <div class="container">
+        <h2>События сенсорных экранов и мыши</h2>
+        <p>Коснитесь и перемещайте по элементу или кликните и перетащите мышью:</p>
+        <div id="touchArea">Интерактивный элемент</div>
+    </div>
+
+    <script>
+        const touchArea = document.getElementById("touchArea");
+
+        // Обработчики событий сенсорных экранов
+        touchArea.addEventListener("touchstart", function(event) {
+            // Начало сенсорного взаимодействия (касание)
+            event.preventDefault(); // Предотвратить действие по умолчанию
+            touchArea.textContent = "Коснулись";
+        });
+
+        touchArea.addEventListener("touchmove", function(event) {
+            // Движение по элементу во время сенсорного взаимодействия
+            event.preventDefault();
+            touchArea.textContent = "Перемещаемся...";
+        });
+
+        touchArea.addEventListener("touchend", function(event) {
+            // Завершение сенсорного взаимодействия (отрыв)
+            event.preventDefault();
+            touchArea.textContent = "Отпустили";
+        });
+
+        // Обработчики событий мыши
+        let isMouseDown = false;
+
+        touchArea.addEventListener("mousedown", function(event) {
+            // Начало взаимодействия мыши (нажатие)
+            isMouseDown = true;
+            touchArea.textContent = "Кликнули";
+        });
+
+        touchArea.addEventListener("mousemove", function(event) {
+            // Движение мыши при нажатой кнопке
+            if (isMouseDown) {
+                touchArea.textContent = "Перетаскиваем...";
+            }
+        });
+
+        touchArea.addEventListener("mouseup", function(event) {
+            // Завершение взаимодействия мыши (отпускание)
+            isMouseDown = false;
+            touchArea.textContent = "Отпустили";
+        });
+    </script>
+</body>
+</html>

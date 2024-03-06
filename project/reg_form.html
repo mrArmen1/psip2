@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация студента</title>
+    <link rel="stylesheet" type="text/css" href="styles_registration.css">
+
+</head>
+<body>
+    <h2>Регистрация студента</h2>
+    <form action="process_registration.php" method="post">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name"><br><br>
+        
+        <label for="surname">Фамилия:</label>
+        <input type="text" id="surname" name="surname"><br><br>
+        
+        <label for="tel_number">Номер телефона:</label>
+        <input type="tel" id="tel_number" name="tel_number"><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+        
+        <label for="login">Имя пользователя:</label>
+        <input type="text" id="login" name="login"><br><br>
+        
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password"><br><br>
+        
+        <input type="submit" value="Зарегистрировать">
+    </form>
+    <br>
+    <a href="login_form.html">Уже зарегистрированы? Войдите</a>
+</body>
+</html>

@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.catalog, .cart {
+    flex: 1;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+}
+
+h2 {
+    text-align: center;
+}
+
+.cart-item {
+    margin: 5px 0;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

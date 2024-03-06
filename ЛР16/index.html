@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пример формы</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .custom-form {
+            text-align: left;
+        }
+
+        .custom-form label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .custom-form input[type="text"],
+        .custom-form input[type="password"],
+        .custom-form input[type="email"],
+        .custom-form select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .custom-form input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .custom-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .custom-form button {
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .custom-form button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Пример формы</h1>
+        <form class="custom-form">
+            <label for="text-field">Текстовое поле:</label>
+            <input type="text" id="text-field" name="text-field" required>
+
+            <label for="password-field">Поле ввода пароля:</label>
+            <input type="password" id="password-field" name="password-field" required>
+
+            <label for="email-field">Адрес электронной почты:</label>
+            <input type="email" id="email-field" name="email-field" required>
+
+            <label for="multiline-field">Многострочное текстовое поле:</label>
+            <textarea id="multiline-field" name="multiline-field" rows="4" required></textarea>
+
+            <label>Флажки:</label>
+            <input type="checkbox" id="checkbox1" name="checkbox1">
+            <label for="checkbox1">Опция 1</label>
+
+            <input type="checkbox" id="checkbox2" name="checkbox2">
+            <label for="checkbox2">Опция 2</label>
+
+            <label for="select-list">Список:</label>
+            <select id="select-list" name="select-list">
+                <option value="option1">Вариант 1</option>
+                <option value="option2">Вариант 2</option>
+                <option value="option3">Вариант 3</option>
+            </select>
+
+            <button type="submit">Отправить</button>
+        </form>
+        
+        <div id="result"></div>
+
+        <script>
+            const form = document.querySelector('.custom-form');
+            const resultDiv = document.getElementById('result');
+            const multilineField = document.getElementById('multiline-field');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const textValue = document.getElementById('text-field').value;
+                const passwordValue = document.getElementById('password-field').value;
+                const emailValue = document.getElementById('email-field').value;
+                const multilineValue = multilineField.value;
+                const checkbox1 = document.getElementById('checkbox1').checked;
+                const checkbox2 = document.getElementById('checkbox2').checked;
+                const selectList = document.getElementById('select-list');
+                const selectedOption = selectList.options[selectList.selectedIndex].text;
+
+                // Проверка адреса электронной почты на соответствие регулярному выражению
+                const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                const isEmailValid = emailPattern.test(emailValue);
+
+                if (!isEmailValid) {
+                    resultDiv.innerHTML = 'Неверный формат адреса электронной почты';
+                    return;
+                }
+
+                // Проверка многострочного текстового поля на заглавные буквы
+                const hasUpperCase = /[A-Z]/.test(multilineValue);
+                if (hasUpperCase) {
+                    resultDiv.innerHTML = 'Пожалуйста, измените заглавные буквы на строчные.';
+                    multilineField.focus();
+                    return;
+                }
+
+                const result = `
+                    Введенный текст: ${textValue}<br>
+                    Пароль: ${passwordValue}<br>
+                    Email: ${emailValue}<br>
+                    Многострочный текст: ${multilineValue}<br>
+                    Флажок 1: ${checkbox1 ? 'Выбран' : 'Не выбран'}<br>
+                    Флажок 2: ${checkbox2 ? 'Выбран' : 'Не выбран'}<br>
+                    Выбранный вариант: ${selectedOption}
+                `;
+
+                resultDiv.innerHTML = result;
+            });
+        </script>
+    </div>
+</body>
+</html>

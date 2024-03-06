@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Управление Local Storage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="text"]:not([name="hobbies"]),
+        input[type="text"]:not([name="placeOfBirth"]) {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button[type="submit"],
+        button[type="button"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button[type="button"] {
+            background-color: #dc3545;
+        }
+
+        pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h2>Введите ваши личные данные</h2>
+    <form id="userDataForm">
+        <label for="fullName">ФИО:</label>
+        <input type="text" id="fullName" name="fullName" required>
+
+        <label for="email">Электронная почта:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="birthdate">Дата рождения:</label>
+        <input type="date" id="birthdate" name="birthdate" required>
+
+        <label for="placeOfBirth">Место рождения:</label>
+        <input type="text" id="placeOfBirth" name="placeOfBirth">
+
+        <label for="hobbies">Увлечения:</label>
+        <textarea id="hobbies" name="hobbies" rows="4"></textarea>
+
+        <button type="submit">Сохранить</button>
+        <button type="button" id="clearData">Очистить Local Storage</button>
+    </form>
+
+    <h2>Сохраненные данные в Local Storage</h2>
+    <pre id="savedData"></pre>
+
+    <script>
+        // Функция для сохранения данных в Local Storage
+        function saveUserData() {
+            const fullName = document.getElementById("fullName").value;
+            const email = document.getElementById("email").value;
+            const birthdate = document.getElementById("birthdate").value;
+            const placeOfBirth = document.getElementById("placeOfBirth").value;
+            const hobbies = document.getElementById("hobbies").value;
+
+            const userData = {
+                fullName,
+                email,
+                birthdate,
+                placeOfBirth,
+                hobbies
+            };
+
+            localStorage.setItem('userData', JSON.stringify(userData));
+        }
+
+        // Функция для загрузки данных из Local Storage
+        function loadUserData() {
+            const userData = localStorage.getItem('userData');
+            if (userData) {
+                return JSON.parse(userData);
+            }
+
+            return null;
+        }
+
+        // Функция для отображения данных из Local Storage
+        function displayUserData() {
+            const savedUserData = loadUserData();
+            if (savedUserData) {
+                const savedDataElement = document.getElementById("savedData");
+                savedDataElement.textContent = JSON.stringify(savedUserData, null, 2);
+            }
+        }
+
+        // Функция для очистки Local Storage
+        function clearLocalStorage() {
+            localStorage.removeItem('userData');
+            document.getElementById("savedData").textContent = "";
+        }
+
+        // Обработка отправки формы
+        const userDataForm = document.getElementById("userDataForm");
+        userDataForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            saveUserData();
+            displayUserData();
+        });
+
+        // Обработка нажатия кнопки "Очистить Local Storage"
+        const clearDataButton = document.getElementById("clearData");
+        clearDataButton.addEventListener("click", function () {
+            clearLocalStorage();
+        });
+
+        // Загрузка и отображение данных из Local Storage при загрузке страницы
+        displayUserData();
+    </script>
+</body>
+</html>

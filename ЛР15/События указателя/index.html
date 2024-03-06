@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Тестовая страница</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #dragElement {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Тест событий</h1>
+    </header>
+    <div class="container">
+        <h2>События указателя без перетаскивания</h2>
+        <p>Кликните на элемент:</p>
+        <div id="dragElement">Кликните меня</div>
+    </div>
+
+    <script>
+        const dragElement = document.getElementById("dragElement");
+
+        // Обработчики событий указателя без перетаскивания
+        dragElement.addEventListener("pointerdown", function(event) {
+            // Начало взаимодействия указателя (нажатие)
+            dragElement.style.backgroundColor = "#ff5733";
+        });
+
+        dragElement.addEventListener("pointerup", function(event) {
+            // Завершение взаимодействия указателя (отпускание)
+            dragElement.style.backgroundColor = "#007bff";
+        });
+    </script>
+</body>
+</html>

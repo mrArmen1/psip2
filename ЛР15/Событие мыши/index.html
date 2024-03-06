@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ТЕСТ СОБЫТИЙ</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+  }
+
+  header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+  }
+
+  h1 {
+      margin: 0;
+      padding: 0;
+  }
+
+  .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+  }
+
+  button:hover {
+      background-color: #0056b3;
+  }
+
+  #myButton {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.2s;
+  }
+
+  #myButton:hover {
+    transform: translateY(-5px);
+  }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Тест событий</h1>
+  </header>
+
+  <div class="container">
+    <h2>ТЕСТ ИНТЕРФЕЙСА</h2>
+    <p>ТЫКАЕМ КНОПКУ:</p>
+    <button id="myButton">КЛИК!</button>
+  </div>
+
+  <script>
+    const button = document.getElementById("myButton");
+
+    button.addEventListener("mouseover", function() {
+        button.style.transform = "translateY(-5px)";
+    });
+
+    button.addEventListener("mouseout", function() {
+        button.style.transform = "translateY(0)";
+    });
+    </script>
+
+</body>
+
+</html>

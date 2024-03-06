@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Форма с валидацией</title>
+</head>
+<body>
+    <h1>Форма с валидацией</h1>
+    <form id="myForm">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required>
+        <div class="error" id="emailError"></div>
+
+        <label for="phone">Телефон (XXX-XXX-XXXX):</label>
+        <input type="text" id="phone" name="phone" required>
+        <div class="error" id="phoneError"></div>
+
+        <label for="zip">Почтовый индекс (XXXXX):</label>
+        <input type="text" id="zip" name="zip" required>
+        <div class="error" id="zipError"></div>
+
+        <label for="password">Пароль (минимум 8 символов, буквы и цифры):</label>
+        <input type="password" id="password" name="password" required>
+        <div class="error" id="passwordError"></div>
+
+        <br>
+
+        <input type="submit" value="Отправить">
+        <input type="reset" value="Сбросить">
+    </form>
+
+    <div id="output" style="margin: 20px;"></div>
+
+    <script>
+        const form = document.getElementById("myForm");
+        form.addEventListener("submit", function (event) {
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const zip = document.getElementById("zip").value;
+            const password = document.getElementById("password").value;
+
+            let isValid = true;
+
+            const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+            if (!emailPattern.test(email)) {
+                document.getElementById("emailError").textContent = "Неверный формат email.";
+                isValid = false;
+            } else {
+                document.getElementById("emailError").textContent = "";
+            }
+
+            const phonePattern = /^\d{3}-\d{3}-\d{4}$/;
+            if (!phonePattern.test(phone)) {
+                document.getElementById("phoneError").textContent = "Неверный формат телефона (ожидается XXX-XXX-XXXX).";
+                isValid = false;
+            } else {
+                document.getElementById("phoneError").textContent = "";
+            }
+
+            const zipPattern = /^\d{5}$/;
+            if (!zipPattern.test(zip)) {
+                document.getElementById("zipError").textContent = "Неверный формат почтового индекса (ожидается XXXXX).";
+                isValid = false;
+            } else {
+                document.getElementById("zipError").textContent = "";
+            }
+
+            const passwordPattern = /^(?=.*\d)(?=.*[A-Z]).{8,}$/;
+            if (!passwordPattern.test(password)) {
+                document.getElementById("passwordError").textContent = "Пароль должен содержать минимум 8 символов, включая буквы верхнего регистра и цифры.";
+                isValid = false;
+            } else {
+                document.getElementById("passwordError").textContent = "";
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            } else {
+                event.preventDefault();
+                const formData = new FormData(this);
+                let outputHTML = "<h2>Ваши данные:</h2>";
+                formData.forEach((value, key) => {
+                    outputHTML += `<p><strong>${key}:</strong> ${value}</p>`;
+                });
+                document.getElementById("output").innerHTML = outputHTML;
+            }
+        });
+    </script>
+</body>
+</html>
